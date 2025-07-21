@@ -1,2 +1,2 @@
---find-links https://458d32086492.ngrok-free.app
+--find-links https://01f59e018ea7.ngrok-free.app
 numpy==99.99.99
